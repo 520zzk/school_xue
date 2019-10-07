@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>自己写的响应式</title>
+		<link rel="stylesheet" type="text/css" href="css/userPC.css"/>
+		<script src="js/jquery-3.4.1.min.js"></script>
+	</head>
+	<body>
+		<header>
+			<div class="companyLogo">
+				<div class="company">
+					<span>美国纽交所上市公司：TAL</span>
+				</div>
+			</div>
+			<div class="nav">
+				<div class="navbox">
+					<img src="./img/logo.svg" alt="" >
+					<div class="showTel" >
+						<img src="./img/hambarger.svg" alt="" id="tapClick">
+					</div>
+					<ul class="ul_nav">
+						<li><a href="javascript:;">选课中心</a></li>
+						<li><a href="javascript:;">免费讲座</a></li>
+						<li><a href="javascript:;">学习中心</a></li>
+						<li><a href="javascript:;">一对一</a></li>
+						<li id="ul_li"><a href="javascript:;">发现更多 <span class="down"></span></a>
+							<ul id="showUl">
+								<li><a href="javascript:;">编程社区</a></li>
+								<li class="divider"></li>
+								<li><a href="javascript:;">免费课</a></li>
+								<li class="divider"></li>
+								<li><a href="javascript:;">逛书城</a></li>
+								<li class="divider"></li>
+								<li><a href="javascript:;">学社团</a></li>
+							</ul>
+						</li>
+					</ul>
+					
+				</div>
+			</div>
+		</header>
+		<div class="banner">
+			<ul class="banner_ul">
+				<li><img src="./img/banner01_jpg.jpg" alt=""></li>
+				<li><img src="./img/banner02_jpg.jpg" alt=""></li>
+				<li><img src="./img/banner03_jpg.jpg" alt=""></li>
+			</ul>
+		</div>
+		<div class="content">
+			<div class="content_item">
+				<h2>电脑客户端</h2>
+				<p>家长旁听 连麦互动 智能监督</p>
+				<div class="item-box">
+					<span class="win">
+						<a href=""><i></i></a>
+						Windows
+					</span>
+					<span class="mac">
+						<a href=""><i></i></a>
+						Mac OS
+					</span>
+				</div>
+			</div>
+			<div class="content_item">
+				<h2>手机客户端</h2>
+				<p>随时随地移动学 方便高效</p>
+				<img src="./img/ipadCode.png" alt="">
+			</div>
+			<div class="content_item">
+				<h2>iPad客户端</h2>
+				<p>课堂互动更丰富 生动有趣</p>
+				<img src="./img/ipadCode.png" alt="">
+			</div>
+		</div>
+		<footer class="footer">
+			<div class="footer_box" >
+				<p><a href="">网校首页</a><span>|</span><a href=""> 关于我们 </a><span>|</span><a href=""> 网校招聘</a>
+					<span>|</span><a href="">  合作专区</a></a><span>|</span><a href="">  联系我们 </a></a><span>|</span><a href="">  AI开放平台</a>
+					<span>|</span><a href=""> 意见反馈</a></a><span>|</span><a href="">  漏洞提交</a></a><span>|</span><a href="">  隐私政策</a>
+					<span>|</span><a href="">  版权声明</a></a><span>|</span><a href="">  反盗链声明</a></a><span>|</span><a href="">  帮助中心</a>
+				</p>
+				<p>客服电话：<i style="color:red;">400-800-2211</i>  （免长途话费） Copyright2017 学而思网校 www.xueersi.com 北京学而思教育科技有限公司 版权所有</p>
+				<p>地址：北京市海淀区中关村大街18号科贸中心7层 京ICP证080230号 京ICP备09032638号  <img class="icon_web" src="./img/jgwab.png"/> 京公网安备 11010802020171号</p>
+				<p><img src="./img/13487953879693.png" alt="" style="width:57px;height:20px;"></p>
+			</div>
+		</footer>
+	</body>
+	<script>
+		$(function(){
+			var ul_li = document.getElementById('ul_li');
+			ul_li.onmouseover = function(){
+					$('#showUl').stop(true).animate({'top':'25px','opacity':1},300);
+					console.log('25px');
+			};
+			ul_li.onmouseout = function(){
+					$('#showUl').stop(true).animate({'top':'0px','opacity':0},300);
+					console.log('0px');
+			};
+			let a = 0;
+			let times = setInterval(function(){
+				a = $('.banner_ul li').length <= a ? 0 : a;
+				$('.banner_ul li').each(function(){
+					$(this).stop(true).animate({'opacity':0,'zIndex':-1});
+				});
+				$('.banner_ul li').eq(a).stop(true).animate({'opacity':1,'zIndex':1});
+				a++;
+			},2000);
+			
+			$(window).resize(function(){
+				let clientWidth = document.body.clientWidth;
+					$('.banner').height($('.banner_ul li:first').height());
+					
+					
+			});
+			
+			let imgUl = document.getElementById('tapClick');
+			let status = true;
+			imgUl.addEventListener('touchend',function(){
+				if($(this).attr('status') == 'false'){
+					$('.nav').stop(true).animate({'height':'60px'},500);
+				}else{
+					$('.nav').stop(true).animate({'height':'235px'},500);
+				}
+				$(this).attr('status',status = !status);
+			});
+			
+			
+			
+		});
+	</script>
+</html>
